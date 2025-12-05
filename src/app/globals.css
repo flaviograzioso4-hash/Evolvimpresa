@@ -1,4 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
+
+/* SignPainter titling font (place .woff2 in /public/fonts/) */
+@font-face {
+  font-family: 'SignPainter';
+  src: url('/fonts/SignPainterHouse.woff2') format('woff2'), url('/fonts/SignPainterHouse.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.lamborghini-title {
+  font-family: 'SignPainter', 'Bebas Neue', 'Oswald', 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  /* keep color inherited so existing color utilities continue to apply */
+  color: inherit;
+  /* slight tighter spacing to mimic titling proportions */
+  letter-spacing: -0.01em;
+  /* subtle text glow to integrate with the yellow theme */
+  text-shadow: 0 2px 10px rgba(255,212,0,0.10);
+}
+
+@media (min-width: 768px) {
+  .lamborghini-title { font-size: calc(1em + 5px); }
+}
+
+/* Increase base inline bump to +5px so visible on smaller devices too */
+.lamborghini-title { font-size: calc(1em + 5px); }
 
 :root {
   --background: #ffffff;
@@ -22,5 +49,487 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+/* Glow underline with pulsating background */
+.glow-underline {
+  position: relative;
+  display: inline-block;
+  padding: 0 0.25rem; /* small space so the glow isn't cut off */
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  text-decoration-color: #FFD400;
+  z-index: 0;
+}
+.glow-underline::before {
+  content: "";
+  position: absolute;
+  left: -6px;
+  right: -6px;
+  top: -6px;
+  bottom: -6px;
+  border-radius: 8px;
+  background: radial-gradient(circle at 50% 50%, rgba(255,212,0,0.35), rgba(255,176,0,0.08));
+  filter: blur(12px);
+  opacity: 0.8;
+  z-index: -1;
+  pointer-events: none;
+  transform-origin: center;
+  animation: glow-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes glow-pulse {
+  0% {
+    transform: scale(0.96);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.06);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.96);
+    opacity: 0.6;
+  }
+}
+
+/* Dynamic underline for banner 'GRATIS' - slides from right to left */
+.banner-free {
+  position: relative;
+  display: inline-block;
+}
+.banner-free::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -8px;
+  height: 6px; /* taller for a pen-like stroke */
+  border-radius: 999px;
+  /* make the underline yellow-tinted rather than white */
+  background: linear-gradient(90deg, rgba(255,212,0,1) 0%, rgba(255,212,0,0.95) 60%, rgba(255,176,0,0.9) 100%);
+  box-shadow: 0 0 18px rgba(255,212,0,0.35);
+  transform-origin: left center;
+  transform: scaleX(0) scaleY(0.6) translateY(0);
+  /* animation moved to the activatable class .play-underline to control when it runs */
+}
+
+@keyframes underline-slide {
+  0% {
+    transform: scaleX(0) scaleY(0.6) translateY(0);
+    opacity: 0.9;
+  }
+  60% {
+    transform: scaleX(1.06) scaleY(1.12) translateY(-2px);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleX(1) scaleY(0.95) translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Activatable animation: runs only when the element has the .play-underline class */
+.banner-free.play-underline::after {
+  animation: underline-slide-ltr 1400ms cubic-bezier(.22,.9,.2,1) 320ms forwards;
+}
+
+@keyframes underline-slide-ltr {
+  0% {
+    transform: scaleX(0) scaleY(0.6) translateY(0);
+    opacity: 0.9;
+  }
+  60% {
+    transform: scaleX(1.12) scaleY(1.18) translateY(-3px);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleX(1) scaleY(0.95) translateY(0);
+    opacity: 1;
+  }
+}
+
+.feature-grid{display:grid;gap:1.25rem}
+.feature-box{border:1px solid #0A2B33;background:#071827;padding:1rem;transition:box-shadow 420ms cubic-bezier(.2,.9,.2,1),transform 420ms cubic-bezier(.2,.9,.2,1),border-color 420ms;will-change:transform,box-shadow,border-color;display:flex;flex-direction:column}
+.feature-box .feature-image{border:none;background:transparent}
+.feature-box img{display:block;width:100%;height:100%;object-fit:cover}
+.feature-box[data-active="0"]{opacity:.92;filter:grayscale(.06) brightness(.92);transform:translateY(0)}
+.feature-box[data-active="1"]{border-color:#FFD400;box-shadow:0 8px 40px rgba(255,212,0,0.18),0 2px 10px rgba(0,0,0,0.45);transform:translateY(-6px) scale(1.01)}
+
+@media (min-width:640px){.feature-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media (min-width:768px){.feature-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+/* subtle reveal: fade/slide with per-item delay set inline */
+.feature-box { opacity: 0; transform: translateY(12px); transition-property: opacity, transform, box-shadow, border-color; }
+
+.feature-box[data-active="1"] { opacity: 1; }
+
+/* CTA sweeping light around the border */
+@keyframes sweep-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.primary-cta-wrapper { position: relative; display: inline-block; }
+.primary-cta-svg-back { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+.primary-cta-svg-front { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 30; pointer-events: none; }
+
+/* Blurred outer glow that makes the CTA perimeter read as luminous (always visible) */
+.primary-cta-glow {
+  fill: none;
+  stroke: #FFE55A;
+  stroke-width: 8;
+  stroke-linecap: round;
+  stroke-dasharray: 6 1200; /* mostly solid, small dashes used only for subtle texture */
+  stroke-dashoffset: 0;
+  filter: blur(10px) drop-shadow(0 0 28px rgba(255,212,0,0.4));
+  mix-blend-mode: screen;
+  opacity: 0.45;
+  transition: stroke-width 160ms ease, filter 160ms ease, opacity 160ms ease;
+}
+
+/* Bright moving streak on top of the blurred glow to simulate a sweeping light */
+.primary-cta-streak {
+  fill: none;
+  stroke: #E8FFFF;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 24 720;
+  stroke-dashoffset: 0;
+  filter: blur(3px) drop-shadow(0 0 12px rgba(255,212,0,0.45));
+  mix-blend-mode: screen;
+  opacity: 0.28;
+  /* animations disabled per user request */
+  animation: none !important;
+  transition: stroke-width 140ms ease, filter 140ms ease, opacity 140ms ease;
+}
+
+@keyframes dash-offset { to { stroke-dashoffset: -574; } }
+
+.primary-cta-wrapper:hover .primary-cta-glow,
+.primary-cta-wrapper:focus-within .primary-cta-glow {
+  stroke-width: 18; filter: blur(16px) drop-shadow(0 0 54px rgba(255,212,0,0.95)); opacity: 1;
+}
+.primary-cta-wrapper:hover .primary-cta-streak,
+.primary-cta-wrapper:focus-within .primary-cta-streak {
+  stroke-width: 5; filter: blur(6px) drop-shadow(0 0 26px rgba(255,212,0,1));
+  /* ensure streak animation does not run on hover */
+  animation: none !important;
+}
+
+/* Front reflection: a bright streak that moves back-and-forth across the button perimeter (in front of the CTA) */
+@keyframes reflect-move {
+  0% { transform: translateX(-60%); opacity: 0.85; }
+  50% { transform: translateX(0%); opacity: 1; }
+  100% { transform: translateX(60%); opacity: 0.85; }
+}
+
+.primary-cta-reflection {
+  fill: none;
+  stroke: url(#refGrad);
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-dasharray: 20 600;
+  stroke-dashoffset: 0;
+  filter: blur(2px) drop-shadow(0 0 20px rgba(255,255,255,0.85));
+  mix-blend-mode: screen;
+  opacity: 1;
+  transform-origin: center;
+  /* hide the white reflection entirely per user request */
+  display: none !important;
+}
+
+.primary-cta-wrapper:hover .primary-cta-reflection,
+.primary-cta-wrapper:focus-within .primary-cta-reflection {
+  stroke-width: 12; filter: blur(3px) drop-shadow(0 0 28px rgba(255,255,255,0.95)); opacity: 1;
+  /* keep reflection static */
+  animation: none !important;
+}
+
+/* Perimeter stroke that follows the rounded rect exactly */
+/* precise perimeter sweep: single highlighted segment follows the rounded rect exactly */
+@keyframes perimeter-offset {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: -325.664; }
+}
+
+.primary-cta-perimeter {
+  fill: none;
+  /* use yellow highlight instead of cyan */
+  stroke: rgba(255,212,0,0.72);
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  /* two shorter lit segments chasing each other around the perimeter */
+  stroke-dasharray: 60 60 60 145.664; /* sum approx 325.664 */
+  stroke-dashoffset: 0;
+  filter: blur(1.5px) drop-shadow(0 0 10px rgba(255,212,0,0.22));
+  mix-blend-mode: screen;
+  opacity: 0.42; /* reduced brightness (~half) */
+  /* animations disabled per user request */
+  animation: none !important;
+}
+
+.primary-cta-wrapper:hover .primary-cta-perimeter,
+.primary-cta-wrapper:focus-within .primary-cta-perimeter {
+  stroke-width: 10; filter: blur(4px) drop-shadow(0 0 34px rgba(232,255,255,1)); opacity: 1;
+  /* ensure perimeter stays static */
+  animation: none !important;
+}
+
+/* ensure CTA content is above the SVG stroke */
+.primary-cta-inner { position: relative; z-index: 10; }
+
+/* intensify on hover/focus for interactivity */
+.primary-cta-wrapper:hover .primary-cta-sweep,
+.primary-cta-wrapper:focus-within .primary-cta-sweep {
+  opacity: 1;
+  filter: blur(9px) saturate(1.35) contrast(1.06);
+  animation-duration: 1.8s;
+}
+
+.primary-cta-inner{position:relative;z-index:10;display:inline-flex}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .primary-cta-sweep { animation: none; opacity: 0.08; }
+}
+
+/* Primary CTA simplified: hide decorative wrappers */
+.primary-cta-svg-back,.primary-cta-svg-front{display:none!important;visibility:hidden!important;pointer-events:none!important}
+
+.primary-cta-glow,
+.primary-cta-streak,
+.primary-cta-perimeter,
+.primary-cta-reflection,
+.primary-cta-sweep {
+  display: none !important;
+  visibility: hidden !important;
+  animation: none !important;
+  opacity: 0 !important;
+  filter: none !important;
+}
+
+/* Remove wrapper-level decorative effects */
+.primary-cta-wrapper {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Make the CTA itself a simple orange pill — static, no animation */
+.primary-cta-inner {
+  position: relative;
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: #ff7a00 !important; /* brand orange */
+  color: #ffffff !important;
+  padding: 0.6rem 1.05rem !important;
+  border-radius: 9999px !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  /* subtle, pleasant pulse on the button itself */
+  will-change: transform, box-shadow;
+  animation: cta-inner-pulse 2.4s ease-in-out infinite;
+}
+
+/* Keep an accessible focus ring but no animated effects */
+.primary-cta-inner:focus {
+  outline: 3px solid rgba(255,122,0,0.18) !important;
+  outline-offset: 3px !important;
+}
+
+/* Ensure hover/focus don't re-enable or change visuals */
+.primary-cta-wrapper:hover .primary-cta-inner,
+.primary-cta-wrapper:focus-within .primary-cta-inner {
+  /* keep no extra filter; allow hover scale from utility classes */
+  filter: none !important;
+}
+
+/* CTA background glow and micro-pop to simulate "coming out of screen" */
+@keyframes cta-wave-slow {
+  0%   { transform: translate(calc(-50% + 30px), -50%) scale(1);   opacity: 0.28; }
+  50%  { transform: translate(calc(-50% - 30px), -50%) scale(1.02);  opacity: 0.42; }
+  100% { transform: translate(calc(-50% + 30px), -50%) scale(1);   opacity: 0.28; }
+}
+
+@keyframes cta-pop {
+  0%   { transform: translate(-50%,-50%) scale(0.98); opacity: 0; filter: blur(6px) drop-shadow(0 0 0 rgba(255,255,255,0)); }
+  30%  { transform: translate(-50%,-50%) scale(1.10); opacity: 0.95; filter: blur(20px) drop-shadow(0 18px 60px rgba(255,255,255,0.65)); }
+  60%  { transform: translate(-50%,-50%) scale(1.04); opacity: 0.46; filter: blur(14px) drop-shadow(0 12px 36px rgba(255,255,255,0.45)); }
+  100% { transform: translate(-50%,-50%) scale(0.98); opacity: 0; filter: blur(6px) drop-shadow(0 0 0 rgba(255,255,255,0)); }
+}
+
+.primary-cta-wrapper {
+  position: relative; /* ensure pseudo-elements are positioned to the CTA */
+}
+
+/* Large soft white halo that slowly undulates */
+.primary-cta-wrapper::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  width: calc(100% + 160px); /* large but more focused ring */
+  height: calc(100% + 160px);
+  border-radius: 9999px;
+  /* retro-like ring: transparent center, soft orange ring around the button */
+  background: radial-gradient(circle at center, transparent 44%, rgba(255,122,26,0.30) 56%, rgba(255,122,26,0.18) 64%, transparent 72%);
+  /* increased blur so the retro-illumination reads softer and more noticeable */
+  filter: blur(32px) drop-shadow(0 20px 56px rgba(255,122,26,0.14));
+  opacity: 0.78;
+  z-index: 6; /* behind .primary-cta-inner (z-index:10) */
+  pointer-events: none;
+  animation: cta-wave-slow 3.2s ease-in-out infinite;
+}
+
+/* Micro-pop that looks like the button pops out briefly */
+.primary-cta-wrapper::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0.98);
+  width: calc(100% + 40px);
+  height: calc(100% + 40px);
+  border-radius: 9999px;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.95), rgba(255,255,255,0.6) 40%, transparent 60%);
+  filter: blur(10px);
+  /* remove the micro-pop (3D pop-out) per request; keep disabled */
+  display: none !important;
+  opacity: 0 !important;
+  z-index: -1 !important;
+  pointer-events: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .primary-cta-wrapper::before,
+  .primary-cta-wrapper::after { animation: none !important; opacity: 0.45 !important; }
+}
+
+/* subtle pulse for the CTA element itself */
+@keyframes cta-inner-pulse {
+  0%   { transform: scale(1); box-shadow: 0 8px 30px rgba(255,122,26,0.10); }
+  50%  { transform: scale(1.035); box-shadow: 0 14px 44px rgba(255,122,26,0.14); }
+  100% { transform: scale(1); box-shadow: 0 8px 30px rgba(255,122,26,0.10); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .primary-cta-inner { animation: none !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .primary-cta-wrapper::before { animation: none !important; opacity: 0.5 !important; }
+}
+
+
+/* MarketGraphic (SVG) animations and helpers */
+.market-graphic { display: block; margin: 0 auto; }
+.market-graphic .mg-bg { fill: none; }
+.market-graphic .mg-glow { fill: rgba(255,212,0,0.06); filter: blur(22px); }
+.market-graphic .mg-circle { fill: rgba(255,212,0,0.18); filter: blur(8px); }
+.market-graphic .mg-line { fill: none; stroke: #FFD400; stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; opacity: 0.95; filter: drop-shadow(0 6px 18px rgba(255,176,0,0.12)); }
+.market-graphic .mg-line-anim { stroke: #FFB000; stroke-width: 3.2; stroke-dasharray: 180; stroke-dashoffset: 0; animation: mg-line-move 3.6s linear infinite; }
+.market-graphic .mg-dot { fill: #FFE55A; stroke: rgba(255,176,0,0.9); stroke-width: 1; }
+.market-graphic .mg-dot-pulse { transform-origin: center; animation: mg-dot-pulse 2.8s ease-in-out infinite; }
+
+@keyframes mg-line-move {
+  0% { stroke-dashoffset: 0; opacity: 0.95; }
+  50% { stroke-dashoffset: -120; opacity: 1; }
+  100% { stroke-dashoffset: -240; opacity: 0.95; }
+}
+
+@keyframes mg-dot-pulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.18); opacity: 0.9; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* subtle horizontal parallax for decorative lines */
+.market-graphic .mg-parallax { animation: mg-parallax 8s ease-in-out infinite; }
+@keyframes mg-parallax {
+  0% { transform: translateX(-6px); }
+  50% { transform: translateX(6px); }
+  100% { transform: translateX(-6px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .market-graphic .mg-line-anim,
+  .market-graphic .mg-dot-pulse,
+  .market-graphic .mg-parallax { animation: none !important; }
+}
+
+
+.lamborghini-scale-plus{font-size:calc(1em + 12px)!important}
+
+/* Lamborghini display helpers: brand titling and important emphasis */
+.lamborghini {
+  font-family: 'SignPainter', 'Bebas Neue', 'Oswald', 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.lamborghini-important {
+  font-family: 'SignPainter', 'Bebas Neue', 'Oswald', 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif !important;
+  display: inline-block;
+  line-height: 1;
+  letter-spacing: -0.02em !important;
+  font-weight: 700 !important;
+  text-shadow: 0 6px 22px rgba(255,212,0,0.18), 0 1px 0 rgba(0,0,0,0.35);
+  transform: translateZ(0);
+}
+
+/* Heartbeat / pulse for emphasised display text (e.g. "Clienti Garantiti") */
+@keyframes heartbeat {
+  0%   { transform: scale(1); }
+  14%  { transform: scale(1.14); }
+  28%  { transform: scale(0.98); }
+  42%  { transform: scale(1.08); }
+  70%  { transform: scale(1); }
+  100% { transform: scale(1); }
+}
+.heartbeat {
+  display: inline-block;
+  transform-origin: center;
+  animation: heartbeat 1.2s cubic-bezier(.22,.9,.2,1) infinite;
+  /* subtle yellow glow during the beat */
+  text-shadow: 0 6px 22px rgba(255,212,0,0.18), 0 1px 0 rgba(0,0,0,0.35);
+}
+@media (prefers-reduced-motion: reduce) {
+  .heartbeat { animation: none !important; }
+}
+
+/* Typewriter caret and blink */
+@keyframes caret-blink { 0%, 49% { opacity: 1 } 50%, 100% { opacity: 0 } }
+.type-caret { display: inline-block; width: .6ch; margin-left: .08rem; }
+.type-caret::after { content: '|'; display: inline-block; opacity: 1; animation: caret-blink 1s steps(1,end) infinite; color: #FFD400; }
+@media (prefers-reduced-motion: reduce) { .type-caret::after { content: ''; animation: none !important; } }
+
+/* Slightly smaller variant for inline emphasis */
+.lamborghini-important.small {
+  font-size: clamp(1rem, 2.6vw, 2rem) !important;
+}
+
+@media (max-width:767px){.cantieri-mobile{font-size:1.15em!important;line-height:1!important}}
+
+/* Header styles (kept minimal) */
+.site-header-wrap{position:fixed;left:0;right:0;top:.5rem;display:flex;justify-content:center;z-index:60;pointer-events:none}
+.site-header{pointer-events:auto;width:100%;max-width:96rem;margin:0 auto;padding:.125rem}
+.site-header-inner{backdrop-filter:blur(10px) saturate(1.05);-webkit-backdrop-filter:blur(10px) saturate(1.05);background:linear-gradient(180deg,rgba(6,6,8,0.30),rgba(255,212,0,0.04));border:1px solid rgba(255,212,0,0.12);border-radius:14px;box-shadow:0 8px 28px rgba(255,212,0,0.05),0 4px 12px rgba(0,0,0,0.35);display:flex;align-items:center;justify-content:space-between;padding:.0625rem .45rem}
+.site-header .logo-text{font-weight:800;color:#FFD400}
+.site-header a{color:#FFD400;font-weight:600}
+.site-header a:hover{color:#FFF}
+.site-header-inner::before{content:"";position:absolute;inset:0;border-radius:14px;pointer-events:none;box-shadow:0 6px 30px rgba(255,212,0,0.09) inset,0 8px 40px rgba(255,212,0,0.04);mix-blend-mode:screen}
+.site-header-inner img,.site-header-inner picture,.site-header-inner .logo-img,.site-header-inner>div img{border:none!important;box-shadow:none!important;outline:none!important;background:transparent!important;padding:0!important;margin:0!important}
+@media (prefers-reduced-motion: reduce){.site-header-inner{transition:none}}
+
+
