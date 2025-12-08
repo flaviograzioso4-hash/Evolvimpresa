@@ -172,15 +172,15 @@ function ProIconDrop3D() {
 /**********************
  * UI HELPERS (compattati)
  **********************/
-const TIFFANY_CARD = 'relative bg-[#071827] border-4 border-transparent rounded-3xl transition duration-500 will-change-transform';
+const TIFFANY_CARD = 'relative bg-white border-4 border-transparent rounded-3xl transition duration-500 will-change-auto';
 const TIFFANY_CARD_P = 'p-8';
 const TIFFANY_CARD_SMALL = 'rounded-2xl border-4 border-transparent transition duration-500';
 
 function TiffanyBox({ children, className = '', small = false, threshold = 0.25 }) {
   const ref = useRef(null);
   const { active } = usePersistentInView(ref, threshold);
-  const activeClass = 'border-[#FFE55A] ring-4 ring-[#FFE55A]/40 shadow-[0_0_100px_rgba(255,212,0,0.85)] bg-[#071827]/90 scale-[1.02]';
-  const inactiveClass = 'ring-0 shadow-[0_0_20px_rgba(255,212,0,0.1)] scale-100';
+  const activeClass = 'border-[#FF7A1A] ring-4 ring-[#FF7A1A]/40 shadow-[0_0_100px_rgba(255,122,26,0.25)] bg-white scale-[1.02]';
+  const inactiveClass = 'ring-0 shadow-[0_0_20px_rgba(255,122,26,0.08)] scale-100';
   const base = small ? TIFFANY_CARD_SMALL : TIFFANY_CARD;
   return (
     <div ref={ref} className={`${base} ${active ? activeClass : inactiveClass} ${className}`}>{children}</div>
@@ -194,10 +194,10 @@ function GlowCard({ icon, title, children, index }) {
   return (
     <TiffanyBox className={wrapperClass}>
       <div ref={ref} />
-      <div className="pointer-events-none absolute -top-10 -left-10 w-32 h-32 rounded-full bg-[#FFD400]/25 blur-3xl" />
+      <div className="pointer-events-none absolute -top-10 -left-10 w-32 h-32 rounded-full bg-[#FF7A1A]/15 blur-3xl" />
       {typeof index !== 'undefined' ? (
         <div className={`absolute -top-8 left-1/2 -translate-x-1/2 md:top-1/2 md:-left-8 md:-translate-y-1/2 md:translate-x-0 w-[60px] h-[60px] rounded-full flex items-center justify-center text-2xl font-extrabold z-30 ${
-          active ? 'bg-[#FFE55A] text-[#020617] ring-4 ring-[#FFE55A]/40 shadow-[0_0_40px_rgba(255,212,0,0.7)]' : 'bg-[#0A2B33] text-white/80'
+          active ? 'bg-[#FF7A1A] text-white ring-4 ring-[#FF7A1A]/40 shadow-[0_0_40px_rgba(255,122,26,0.4)]' : 'bg-white text-[#1a1a1a] border-2 border-[#FFD400]/30'
         }`}>{index}</div>
       ) : null}
       <div className={`relative z-10 ${typeof index !== 'undefined' ? 'pt-14 md:pt-6 text-center' : 'flex flex-col items-center justify-center text-center py-8'}`}>
@@ -205,12 +205,12 @@ function GlowCard({ icon, title, children, index }) {
           <div className="mb-4 flex items-center justify-center">
             <div className="relative w-20 h-20 rounded-full bg-[#FFD400]/20 flex items-center justify-center text-4xl">
               <span className="relative z-10">{icon}</span>
-              <div className="pointer-events-none absolute inset-0 rounded-full bg-[#FFE55A]/10 blur-xl" />
+              <div className="pointer-events-none absolute inset-0 rounded-full bg-[#FF7A1A]/10 blur-xl" />
             </div>
           </div>
         ) : null}
-        <h3 className="text-xl font-semibold text-white mb-2">{title}</h3>
-        <p className="text-white/80 text-sm leading-relaxed">{children}</p>
+        <h3 className="text-xl font-semibold text-[#1a1a1a] mb-2">{title}</h3>
+        <p className="text-[#666] text-sm leading-relaxed">{children}</p>
       </div>
     </TiffanyBox>
   );
@@ -252,7 +252,7 @@ function ContactForm() {
   const onChange = (e) => setForm((s) => ({ ...s, [e.target.name]: e.target.value }));
   const onSubmit = (e) => { e.preventDefault(); setStatus('sending'); setTimeout(() => setStatus('sent'), 700); };
 
-  const inputCls = 'bg-[#071827] border border-[#0A2B33] rounded-md px-3 py-2 md:px-4 md:py-3 md:text-lg text-white placeholder:text-white/40 focus:ring-2 focus:ring-[#FFD400]/30 outline-none';
+  const inputCls = 'bg-white border border-[#E0E0E0] rounded-md px-3 py-2 md:px-4 md:py-3 md:text-lg text-[#1a1a1a] placeholder:text-[#999] focus:ring-2 focus:ring-[#FF7A1A]/30 outline-none';
 
   return (
     <form onSubmit={onSubmit} className="w-full max-w-2xl md:text-lg">
@@ -264,12 +264,12 @@ function ContactForm() {
           ['azienda', 'Azienda', 'Nome azienda', 'text'],
         ].map(([name, label, placeholder, type]) => (
           <label key={name} className="flex flex-col text-sm md:text-base">
-            <span className="text-white/90 mb-1">{label}</span>
+            <span className="text-[#1a1a1a] mb-1">{label}</span>
             <input type={type} name={name} value={form[name]} onChange={onChange} required={name !== 'azienda'} className={inputCls} placeholder={placeholder} />
           </label>
         ))}
         <label className="flex flex-col text-sm sm:col-span-2 md:text-base">
-          <span className="text-white/90 mb-1">Provincia</span>
+          <span className="text-[#1a1a1a] mb-1">Provincia</span>
           <input name="provincia" value={form.provincia} onChange={onChange} className={inputCls} placeholder="Es. Milano" />
         </label>
       </div>
@@ -278,8 +278,8 @@ function ContactForm() {
           {status === 'sending' ? 'Invio…' : status === 'sent' ? 'Grazie!' : 'Richiedi consulenza'}
         </button>
       </div>
-      <p className="mt-3 text-center font-semibold text-white md:text-lg lg:text-xl">Lavoriamo con aziende selezionate.</p>
-      {status === 'sent' ? <p className="mt-3 text-sm text-[#FFE55A]">Grazie! Ti contatteremo a breve via WhatsApp o email.</p> : null}
+      <p className="mt-3 text-center font-semibold text-[#1a1a1a] md:text-lg lg:text-xl">Lavoriamo con aziende selezionate.</p>
+      {status === 'sent' ? <p className="mt-3 text-sm text-[#FF7A1A]">Grazie! Ti contatteremo a breve via WhatsApp o email.</p> : null}
     </form>
   );
 }
@@ -287,9 +287,9 @@ function ContactForm() {
 function RevealBox({ children, className = '' }) {
   const ref = useRef(null);
   const { active } = usePersistentInView(ref, 0.25);
-  const base = 'rounded-[28px] border-4 border-transparent bg-[#061321]/70 p-8 md:p-12 transition duration-700 will-change-transform';
-  const activeClass = 'border-[#FFE55A] ring-4 ring-[#FFE55A]/40 shadow-[0_0_160px_rgba(255,212,0,0.8)] scale-[1.02]';
-  const inactiveClass = 'ring-0 shadow-[0_0_30px_rgba(255,212,0,0.12)] scale-100';
+  const base = 'rounded-[28px] border-4 border-transparent bg-white p-8 md:p-12 transition duration-700 will-change-auto';
+  const activeClass = 'border-[#FF7A1A] ring-4 ring-[#FF7A1A]/40 shadow-[0_0_160px_rgba(255,122,26,0.25)] scale-[1.02]';
+  const inactiveClass = 'ring-0 shadow-[0_0_30px_rgba(255,122,26,0.08)] scale-100';
   return <div ref={ref} className={`${base} ${active ? activeClass : inactiveClass} ${className}`}>{children}</div>;
 }
 
@@ -301,20 +301,20 @@ function StepItem({ index, title, children }) {
   const { active } = usePersistentInView(ref, 0.6);
   return (
     <div ref={ref} className={`relative p-6 pt-14 md:pt-8 rounded-2xl border transition-all duration-300 ${
-      active ? 'border-[#FFE55A] ring-4 ring-[#FFE55A]/40 shadow-[0_0_100px_rgba(255,212,0,0.85)] bg-[#071827]/90' : 'border-[#0A2B33] bg-[#071827]/70 opacity-90'
+      active ? 'border-[#FF7A1A] ring-4 ring-[#FF7A1A]/40 shadow-[0_0_100px_rgba(255,122,26,0.25)] bg-white' : 'border-[#E0E0E0] bg-white'
     }`}>
       <div className={`absolute -top-8 left-1/2 -translate-x-1/2 md:top-1/2 md:-left-8 md:-translate-y-1/2 md:translate-x-0 w-[60px] h-[60px] rounded-full flex items-center justify-center text-2xl font-extrabold z-30 ${
-        active ? 'bg-[#FFE55A] text-[#020617] ring-4 ring-[#FFE55A]/40 shadow-[0_0_40px_rgba(255,212,0,0.7)]' : 'bg-[#0A2B33] text-white/80'
+        active ? 'bg-[#FF7A1A] text-white ring-4 ring-[#FF7A1A]/40 shadow-[0_0_40px_rgba(255,122,26,0.4)]' : 'bg-white text-[#1a1a1a] border-2 border-[#FFD400]/30'
       }`}>{index}</div>
-      <h3 className="text-lg font-semibold mb-2">{title}</h3>
-      <p className="text-white/80 text-sm leading-relaxed">{children}</p>
+      <h3 className="text-lg font-semibold mb-2 text-[#1a1a1a]">{title}</h3>
+      <p className="text-[#666] text-sm leading-relaxed">{children}</p>
     </div>
   );
 }
 function VerticalSteps() {
   return (
     <div className="relative max-w-3xl mx-auto mb-12">
-      <div className="hidden md:block absolute left-0 top-0 bottom-0 w-[2px] bg-gradient-to-b from-[#FFD400]/40 via-[#FFD400]/20 to-transparent ml-4" />
+      <div className="hidden md:block absolute left-0 top-0 bottom-0 w-[2px] bg-gradient-to-b from-[#FF7A1A]/40 via-[#FF7A1A]/20 to-transparent ml-4" />
       <div className="space-y-6 pl-0 md:pl-8">
         <StepItem index="1" title="Obiettivi reali e concreti">Definiamo insieme un primo traguardo misurabile: zona, servizi, capacità e margini.</StepItem>
         <StepItem index="2" title="Troviamo le persone giuste">Campagne locali e attivazioni che intercettano chi cerca davvero lavori come i tuoi. Zero curiosi.</StepItem>
@@ -346,15 +346,15 @@ function Header() {
             <a href="#contatto" className="text-sm md:text-base">Contatto</a>
           </nav>
           <div className="md:hidden">
-            <button onClick={() => setOpen(!open)} aria-expanded={open} aria-label="Apri menu" className="p-2 rounded-md bg-[#FFD400] text-[#020617] shadow-[0_6px_22px_rgba(255,212,0,0.14)]">☰</button>
+            <button onClick={() => setOpen(!open)} aria-expanded={open} aria-label="Apri menu" className="p-2 rounded-md bg-[#FF7A1A] text-white shadow-[0_6px_22px_rgba(255,122,26,0.14)]">☰</button>
           </div>
         </div>
         {open ? (
-          <div className="md:hidden mt-2 bg-white/6 backdrop-blur-md rounded-xl p-3 border border-white/6">
+          <div className="md:hidden mt-2 bg-white/80 backdrop-blur-md rounded-xl p-3 border border-white/20">
             <nav className="flex flex-col gap-2">
-              <a href="#come-funziona" className="block text-white/90" onClick={() => setOpen(false)}>Come funziona</a>
-              <a href="#candidatura" className="block text-white/90" onClick={() => setOpen(false)}>Candidatura</a>
-              <a href="#contatto" className="block text-white/90" onClick={() => setOpen(false)}>Contatto</a>
+              <a href="#come-funziona" className="block text-[#1a1a1a]" onClick={() => setOpen(false)}>Come funziona</a>
+              <a href="#candidatura" className="block text-[#1a1a1a]" onClick={() => setOpen(false)}>Candidatura</a>
+              <a href="#contatto" className="block text-[#1a1a1a]" onClick={() => setOpen(false)}>Contatto</a>
             </nav>
           </div>
         ) : null}
@@ -374,12 +374,12 @@ function PageContent() {
       {/* HERO */}
       <section className="min-h-screen py-24 px-6 bg-white relative overflow-hidden border-b border-[#FFD400]/20">
         <div className="pointer-events-none absolute inset-0">
-          <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-[120px] h-[120px] rounded-full bg-[#FFD400]/6 blur-[28px]" />
+          <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-[120px] h-[120px] rounded-full bg-[#FF7A1A]/6 blur-[28px]" />
         </div>
         <div className="relative max-w-6xl mx-auto w-full">
           <div className="max-w-5xl mx-auto text-center">
             <p className="text-3xl md:text-4xl lg:text-5xl text-[#666] mb-3 whitespace-nowrap">
-              <Typewriter text={"Contatti? No Cantieri!🚧"} speed={50} className="inline-block" highlightText={"Cantieri!"} highlightClass={'lamborghini text-[#FFD400]'} highlightStyle={{ fontSize: 'calc(1em + 4px)' }} />
+              <Typewriter text={"Contatti? No Cantieri!🚧"} speed={50} className="inline-block" highlightText={"Cantieri!"} highlightClass={'lamborghini text-[#FF7A1A]'} highlightStyle={{ fontSize: 'calc(1em + 4px)' }} />
             </p>
             <h1 className="font-extrabold leading-tight mb-4 text-center">
               <span className="block text-3xl md:text-4xl lg:text-5xl leading-tight">Con il <span className="text-[#FF7A1A]">partner giusto </span><span className="text-[#1a1a1a]">arrivano</span></span>
@@ -390,13 +390,13 @@ function PageContent() {
             </p>
             <div className="mt-6 mb-4 text-center">
               <p className="font-semibold tracking-tight flex flex-row items-center justify-center gap-2 flex-nowrap">
-                <span className="banner-left text-base md:text-lg lg:text-xl whitespace-nowrap">Oppure lavoriamo</span>
-                <span className={`banner-free text-[#FFD400] drop-shadow-[0_0_14px_rgba(255,212,0,0.45)] text-5xl md:text-4xl lg:text-5xl whitespace-nowrap ${playFree ? 'play-underline' : ''}`}>GRATIS</span>
+                <span className="banner-left text-base md:text-lg lg:text-xl whitespace-nowrap text-[#1a1a1a]">Oppure lavoriamo</span>
+                <span className={`banner-free text-[#FF7A1A] drop-shadow-[0_0_14px_rgba(255,122,26,0.45)] text-5xl md:text-4xl lg:text-5xl whitespace-nowrap ${playFree ? 'play-underline' : ''}`}>GRATIS</span>
               </p>
             </div>
             <div className="mt-10 max-w-3xl mx-auto">
               <TiffanyBox className="p-6 overflow-hidden rounded-3xl">
-                <ImgWithFallback src="/mnt/data/371906770_HITTING_TARGET_400x400.gif" alt="Target centrato: garanzia Oppure lavoriamo GRATIS" className="w-full h-64 md:h-80 rounded-3xl border border-[#0A2B33] ring-2 ring-[#FFD400]/8 object-cover transition-all duration-700 hover:scale-105" />
+                <ImgWithFallback src="/mnt/data/371906770_HITTING_TARGET_400x400.gif" alt="Target centrato: garanzia Oppure lavoriamo GRATIS" className="w-full h-64 md:h-80 rounded-3xl border border-[#E0E0E0] ring-2 ring-[#FFD400]/8 object-cover transition-all duration-700 hover:scale-105" />
               </TiffanyBox>
             </div>
             <div className="mt-12 mb-14 flex justify-center">
@@ -412,22 +412,22 @@ function PageContent() {
       </section>
 
       {/* IL VERO PROBLEMA */}
-      <section className="py-28 px-6 bg-[#020B14] relative overflow-hidden">
+      <section className="py-28 px-6 bg-white relative overflow-hidden border-b border-[#FFD400]/20">
         <div className="pointer-events-none absolute inset-0">
-          <div className="absolute right-[-80px] top-[-80px] w-64 h-64 rounded-full bg-[#FFD400]/20 blur-[160px]" />
-          <div className="absolute left-[-80px] bottom-[-80px] w-64 h-64 rounded-full bg-[#FFD400]/10 blur-[160px]" />
+          <div className="absolute right-[-80px] top-[-80px] w-64 h-64 rounded-full bg-[#FF7A1A]/10 blur-[160px]" />
+          <div className="absolute left-[-80px] bottom-[-80px] w-64 h-64 rounded-full bg-[#FF7A1A]/8 blur-[160px]" />
         </div>
         <div className="relative max-w-6xl mx-auto">
           <RevealBox className="backdrop-blur">
             <div className="flex items-center gap-3 mb-6">
-              <div className="h-1 w-10 rounded bg-[#FFD400]" />
-              <p className="text-[#FFD400] text-sm tracking-widest uppercase">Il problema reale</p>
+              <div className="h-1 w-10 rounded bg-[#FF7A1A]" />
+              <p className="text-[#FF7A1A] text-sm tracking-widest uppercase">Il problema reale</p>
             </div>
             <div className="grid gap-10 md:grid-cols-2 md:items-center">
               <div>
-                <h2 className="text-3xl md:text-4xl font-bold mb-4">Perché è difficile crescere oggi.</h2>
-                <p className="text-white/80 text-lg leading-relaxed mb-6">Troppi preventivi inutili, richieste non in linea e margini che si assottigliano. Il problema non sono i contatti, <span className="text-[#FFD400] font-semibold"> è arrivare al sopralluogo giusto, nel momento giusto.</span></p>
-                <ul className="grid gap-3 text-white/85 text-sm md:text-base">
+                <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#1a1a1a]">Perché è difficile crescere oggi.</h2>
+                <p className="text-[#555] text-lg leading-relaxed mb-6">Troppi preventivi inutili, richieste non in linea e margini che si assottigliano. Il problema non sono i contatti, <span className="text-[#FF7A1A] font-semibold"> è arrivare al sopralluogo giusto, nel momento giusto.</span></p>
+                <ul className="grid gap-3 text-[#666] text-sm md:text-base">
                   <li className="flex items-start gap-3"><ProIconAlert3D /> <span>Tempo perso con curiosi e richieste senza budget.</span></li>
                   <li className="flex items-start gap-3"><ProIconProcess3D /> <span>Processi disordinati: nessuno filtra, tutti chiedono preventivi.</span></li>
                   <li className="flex items-start gap-3"><ProIconDrop3D /> <span>Margini sotto pressione: più ore, meno risultati.</span></li>
@@ -442,33 +442,33 @@ function PageContent() {
       </section>
 
       {/* CHIUSURA */}
-      <section className="py-28 px-6 bg-[#03101B] relative overflow-hidden">
-        <div className="pointer-events-none absolute inset-0"><div className="absolute left-[-120px] bottom-[-100px] w-72 h-72 rounded-full bg-[#FFD400]/20 blur-[160px]" /></div>
+      <section className="py-28 px-6 bg-white relative overflow-hidden border-b border-[#FFD400]/20">
+        <div className="pointer-events-none absolute inset-0"><div className="absolute left-[-120px] bottom-[-100px] w-72 h-72 rounded-full bg-[#FF7A1A]/8 blur-[160px]" /></div>
         <div className="relative max-w-6xl mx-auto z-10">
           <RevealBox className="text-left md:text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Il tuo mercato non aspetta.</h2>
-            <p className="text-white/80 text-lg max-w-3xl mx-auto leading-relaxed mb-10">Più cantieri, più margini, un sistema che ti accompagna ogni mese. Non per provare: <span className="text-[#FFD400] font-semibold"> per crescere</span>.</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#1a1a1a]">Il tuo mercato non aspetta.</h2>
+            <p className="text-[#555] text-lg max-w-3xl mx-auto leading-relaxed mb-10">Più cantieri, più margini, un sistema che ti accompagna ogni mese. Non per provare: <span className="text-[#FF7A1A] font-semibold"> per crescere</span>.</p>
             <ImgWithFallback src="GIF 1 .gif" alt="Mockup mercato che scende" className="block mx-auto w-full md:w-[40%] h-auto shadow-none md:-mt-6" />
           </RevealBox>
         </div>
       </section>
 
       {/* VALORE */}
-      <section className="py-28 px-6 bg-[#020617] relative overflow-hidden">
+      <section className="py-28 px-6 bg-white relative overflow-hidden border-b border-[#FFD400]/20">
         <div className="pointer-events-none absolute inset-0">
-          <div className="absolute right-[-120px] top-[-80px] w-72 h-72 rounded-full bg-[#FFD400]/16 blur-[160px]" />
-          <div className="absolute left-[-120px] bottom-[-100px] w-72 h-72 rounded-full bg-[#FFD400]/8 blur-[160px]" />
+          <div className="absolute right-[-120px] top-[-80px] w-72 h-72 rounded-full bg-[#FF7A1A]/10 blur-[160px]" />
+          <div className="absolute left-[-120px] bottom-[-100px] w-72 h-72 rounded-full bg-[#FF7A1A]/8 blur-[160px]" />
         </div>
         <div className="relative max-w-6xl mx-auto">
           <RevealBox className="backdrop-blur">
             <div className="grid gap-10 md:grid-cols-2 md:items-center">
               <div className="md:order-1">
-                <h2 className="text-3xl md:text-4xl font-bold mb-4">Perché il nostro Sistema vale più di un dipendente.</h2>
-                <p className="text-white/80 text-lg leading-relaxed mb-6">Un dipendente costa ~36.000€/anno tra contributi e gestione. Noi costiamo meno, generiamo sopralluoghi reali e portiamo un metodo che cresce con la tua impresa.</p>
+                <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#1a1a1a]">Perché il nostro Sistema vale più di un dipendente.</h2>
+                <p className="text-[#555] text-lg leading-relaxed mb-6">Un dipendente costa ~36.000€/anno tra contributi e gestione. Noi costiamo meno, generiamo sopralluoghi reali e portiamo un metodo che cresce con la tua impresa.</p>
                 <div className="grid sm:grid-cols-3 gap-4">
-                  <TiffanyBox small className="p-4 text-center bg-[#071827]"><p className="text-2xl font-extrabold">36k€</p><p className="text-xs text-white/60">Costo annuo medio</p></TiffanyBox>
-                  <TiffanyBox small className="p-4 text-center bg-[#071827]"><p className="text-2xl font-extrabold">KPI</p><p className="text-xs text-white/60">Sopralluoghi/mese</p></TiffanyBox>
-                  <TiffanyBox small className="p-4 text-center bg-[#071827]"><p className="text-2xl font-extrabold">ROI</p><p className="text-xs text-white/60">Metodo scalabile</p></TiffanyBox>
+                  <TiffanyBox small className="p-4 text-center bg-white"><p className="text-2xl font-extrabold text-[#1a1a1a]">36k€</p><p className="text-xs text-[#999]">Costo annuo medio</p></TiffanyBox>
+                  <TiffanyBox small className="p-4 text-center bg-white"><p className="text-2xl font-extrabold text-[#1a1a1a]">KPI</p><p className="text-xs text-[#999]">Sopralluoghi/mese</p></TiffanyBox>
+                  <TiffanyBox small className="p-4 text-center bg-white"><p className="text-2xl font-extrabold text-[#1a1a1a]">ROI</p><p className="text-xs text-[#999]">Metodo scalabile</p></TiffanyBox>
                 </div>
               </div>
               <div className="md:order-2 flex justify-center mt-6 md:mt-0">
@@ -480,20 +480,20 @@ function PageContent() {
       </section>
 
       {/* NON È ADATTO */}
-      <section className="py-28 px-6 bg-[#020B14] relative overflow-hidden" id="candidatura">
-        <div className="pointer-events-none absolute inset-0"><div className="absolute left-[-80px] top-[-80px] w-64 h-64 rounded-full bg-[#FFD400]/16 blur-[160px]" /></div>
+      <section className="py-28 px-6 bg-white relative overflow-hidden border-b border-[#FFD400]/20" id="candidatura">
+        <div className="pointer-events-none absolute inset-0"><div className="absolute left-[-80px] top-[-80px] w-64 h-64 rounded-full bg-[#FF7A1A]/10 blur-[160px]" /></div>
         <div className="relative max-w-6xl mx-auto">
           <RevealBox className="backdrop-blur">
             <div className="grid gap-10 md:grid-cols-2 md:items-center">
               <div>
-                <h2 className="text-3xl md:text-4xl font-bold mb-4">Con chi <span className="text-white/90">non possiamo lavorare</span>.</h2>
-                <p className="text-white/80 text-lg leading-relaxed mb-4">Per entrare nei nostri programmi serve <span className="text-white">struttura, serietà e volontà di raggiungere un obbiettivo</span>. Il marketing che costruiamo è una leva che<span className="text-white"> amplifica tutto</span>, punti di forza e criticità. Per questo selezioniamo con attenzione con chi lavorare.</p>
-                <p className="text-white/70 leading-relaxed mb-6">Durante il colloquio valuteremo sostenibilità del business nelle zone, disponibilità ai sopralluoghi, organizzazione interna e mentalità di responsabilità.</p>
-                <ul className="space-y-3 text-white/85 text-sm md:text-base mb-8">
-                  <li className="flex items-start gap-3"><span className="mt-1">❌</span><span><span className="text-white">Gestione senza programmazione</span> né pianificazione reale.</span></li>
-                  <li className="flex items-start gap-3"><span className="mt-1">❌</span><span>Zero disponibilità a seguire <span className="text-white">sopralluoghi confermati</span>.</span></li>
-                  <li className="flex items-start gap-3"><span className="mt-1">❌</span><span>Nessuna <span className="text-white">organizzazione minima</span> per gestire i lavori.</span></li>
-                  <li className="flex items-start gap-3"><span className="mt-1">❌</span><span>Chi cerca un “tentativo” invece di un <span className="text-white">sistema stabile e professionale</span>.</span></li>
+                <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#1a1a1a]">Con chi <span className="text-[#666]">non possiamo lavorare</span>.</h2>
+                <p className="text-[#555] text-lg leading-relaxed mb-4">Per entrare nei nostri programmi serve <span className="text-[#1a1a1a]">struttura, serietà e volontà di raggiungere un obbiettivo</span>. Il marketing che costruiamo è una leva che<span className="text-[#1a1a1a]"> amplifica tutto</span>, punti di forza e criticità. Per questo selezioniamo con attenzione con chi lavorare.</p>
+                <p className="text-[#666] leading-relaxed mb-6">Durante il colloquio valuteremo sostenibilità del business nelle zone, disponibilità ai sopralluoghi, organizzazione interna e mentalità di responsabilità.</p>
+                <ul className="space-y-3 text-[#666] text-sm md:text-base mb-8">
+                  <li className="flex items-start gap-3"><span className="mt-1">❌</span><span><span className="text-[#1a1a1a]">Gestione senza programmazione</span> né pianificazione reale.</span></li>
+                  <li className="flex items-start gap-3"><span className="mt-1">❌</span><span>Zero disponibilità a seguire <span className="text-[#1a1a1a]">sopralluoghi confermati</span>.</span></li>
+                  <li className="flex items-start gap-3"><span className="mt-1">❌</span><span>Nessuna <span className="text-[#1a1a1a]">organizzazione minima</span> per gestire i lavori.</span></li>
+                  <li className="flex items-start gap-3"><span className="mt-1">❌</span><span>Chi cerca un "tentativo" invece di un <span className="text-[#1a1a1a]">sistema stabile e professionale</span>.</span></li>
                 </ul>
               </div>
               <div className="relative">
@@ -503,7 +503,7 @@ function PageContent() {
                 <div className="mt-6 flex justify-center md:hidden">
                   <PrimaryCTA href="#contatto"><span className="text-xl leading-none">👤</span>Candidati ora al colloquio di selezione</PrimaryCTA>
                 </div>
-                <div className="pointer-events-none absolute -z-10 -right-10 -bottom-10 w-56 h-56 rounded-full bg-[#FFD400]/10 blur-[120px]" />
+                <div className="pointer-events-none absolute -z-10 -right-10 -bottom-10 w-56 h-56 rounded-full bg-[#FF7A1A]/8 blur-[120px]" />
               </div>
             </div>
             <div className="hidden md:flex justify-center mt-8"><PrimaryCTA href="#contatto"><span className="text-xl leading-none">👤</span>Candidati ora al colloquio di selezione</PrimaryCTA></div>
@@ -512,12 +512,12 @@ function PageContent() {
       </section>
 
       {/* COME FUNZIONA */}
-      <section id="come-funziona" className="py-24 px-6 bg-gradient-to-b from-[#020617] via-[#041421] to-[#020617] relative overflow-hidden">
-        <div className="pointer-events-none absolute inset-0"><div className="absolute right-[-100px] top-0 w-72 h-72 rounded-full bg-[#FFD400]/20 blur-[140px]" /></div>
+      <section id="come-funziona" className="py-24 px-6 bg-white relative overflow-hidden border-b border-[#FFD400]/20">
+        <div className="pointer-events-none absolute inset-0"><div className="absolute right-[-100px] top-0 w-72 h-72 rounded-full bg-[#FF7A1A]/10 blur-[140px]" /></div>
         <div className="relative max-w-6xl mx-auto grid gap-10 md:grid-cols-2 items-center">
           <div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Come funziona il Sistema EvolvImpresa.</h2>
-            <p className="text-white/80 mb-8">Più sopralluoghi utili, meno preventivi a vuoto. Filtriamo chi non è in linea, fissiamo gli appuntamenti e lavoriamo su un obiettivo mensile chiaro.</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#1a1a1a]">Come funziona il Sistema EvolvImpresa.</h2>
+            <p className="text-[#555] mb-8">Più sopralluoghi utili, meno preventivi a vuoto. Filtriamo chi non è in linea, fissiamo gli appuntamenti e lavoriamo su un obiettivo mensile chiaro.</p>
             <div className="space-y-6">
               <GlowCard index={1} title="Filtro serio, non curiosi">Qualifichiamo per budget, zona, tempi e tipologia: arrivano solo richieste compatibili con i tuoi lavori.</GlowCard>
               <GlowCard index={2} title="Appuntamento confermato">Gestiamo noi la conferma del sopralluogo con reminder e calendario: tu entri quando c'è un incontro reale.</GlowCard>
@@ -525,18 +525,18 @@ function PageContent() {
             </div>
           </div>
           <div className="space-y-6">
-            <div className="w-full h-64 md:h-80 rounded-3xl border border-dashed border-[#0A2B33] bg-[#020b12]/60 flex items-center justify-center text-sm text-white/40">VIDEO - Spiegazione Sistema EvolvImpresa</div>
-            <p className="text-xs text-white/50 text-center">Video breve che mostra come si passa dal lead al cantiere.</p>
+            <div className="w-full h-64 md:h-80 rounded-3xl border border-dashed border-[#FFD400]/20 bg-white flex items-center justify-center text-sm text-[#999]">VIDEO - Spiegazione Sistema EvolvImpresa</div>
+            <p className="text-xs text-[#999] text-center">Video breve che mostra come si passa dal lead al cantiere.</p>
           </div>
         </div>
       </section>
 
       {/* COSA OTTIENI */}
-      <section className="py-24 px-6 bg-[#020B14] relative overflow-hidden">
-        <div className="pointer-events-none absolute inset-0"><div className="absolute left-1/2 -translate-x-1/2 bottom-[-160px] w-[420px] h-[420px] rounded-full bg-[#FFD400]/14 blur-[160px]" /></div>
+      <section className="py-24 px-6 bg-white relative overflow-hidden border-b border-[#FFD400]/20">
+        <div className="pointer-events-none absolute inset-0"><div className="absolute left-1/2 -translate-x-1/2 bottom-[-160px] w-[420px] h-[420px] rounded-full bg-[#FF7A1A]/10 blur-[160px]" /></div>
         <div className="relative max-w-6xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">Cosa ottieni davvero per far crescere la tua impresa.</h2>
-          <p className="text-white/80 text-center max-w-3xl mx-auto mb-12">Richieste utili, appuntamenti solidi, margini protetti e <strong>tempo</strong> recuperato per seguire i cantieri che contano davvero.</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 text-[#1a1a1a]">Cosa ottieni davvero per far crescere la tua impresa.</h2>
+          <p className="text-[#555] text-center max-w-3xl mx-auto mb-12">Richieste utili, appuntamenti solidi, margini protetti e <strong>tempo</strong> recuperato per seguire i cantieri che contano davvero.</p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <GlowCard icon="📈" title="Pipeline che lavora per te">Opportunità chiare, stati visibili, probabilità reali. Sai dove mettere il tempo.</GlowCard>
             <GlowCard icon="🤝" title="Appuntamenti di valore (non perditempo)">Filtriamo i curiosi. Restano richieste allineate a budget, zona e tempi.</GlowCard>
@@ -546,18 +546,18 @@ function PageContent() {
       </section>
 
       {/* TEAM */}
-      <section className="py-24 px-6 bg-[#020617] relative overflow-hidden">
-        <div className="pointer-events-none absolute inset-0"><div className="absolute right-[-100px] bottom-[-120px] w-72 h-72 rounded-full bg-[#FFD400]/18 blur-[140px]" /></div>
+      <section className="py-24 px-6 bg-white relative overflow-hidden border-b border-[#FFD400]/20">
+        <div className="pointer-events-none absolute inset-0"><div className="absolute right-[-100px] bottom-[-120px] w-72 h-72 rounded-full bg-[#FF7A1A]/10 blur-[140px]" /></div>
         <div className="relative max-w-6xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">Il team di EvolvImpresa.</h2>
-          <p className="text-white/80 text-center max-w-3xl mx-auto mb-12">Non una piattaforma anonima: persone che ti affiancano su strategia, implementazione e numeri.</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 text-[#1a1a1a]">Il team di EvolvImpresa.</h2>
+          <p className="text-[#555] text-center max-w-3xl mx-auto mb-12">Non una piattaforma anonima: persone che ti affiancano su strategia, implementazione e numeri.</p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {Array.from({ length: 3 }).map((_, i) => (
               <TiffanyBox key={i} className="p-8">
-                <div className="w-20 h-20 rounded-2xl bg-[#020b12] border border-[#0A2B33] ring-2 ring-[#FFD400]/8 mb-4 mx-auto" />
-                <h3 className="text-lg font-semibold text-white text-center">Nome Cognome</h3>
-                <p className="text-xs text-[#FFD400] text-center mb-2">Ruolo</p>
-                <p className="text-white/75 text-sm text-center">Descrizione breve del contributo al progetto.</p>
+                <div className="w-20 h-20 rounded-2xl bg-[#F5F5F5] border border-[#E0E0E0] ring-2 ring-[#FFD400]/8 mb-4 mx-auto" />
+                <h3 className="text-lg font-semibold text-[#1a1a1a] text-center">Nome Cognome</h3>
+                <p className="text-xs text-[#FF7A1A] text-center mb-2">Ruolo</p>
+                <p className="text-[#666] text-sm text-center">Descrizione breve del contributo al progetto.</p>
               </TiffanyBox>
             ))}
           </div>
@@ -565,10 +565,10 @@ function PageContent() {
       </section>
 
       {/* CTA FINALE */}
-      <section id="contatto" className="py-24 px-6 bg-gradient-to-b from-[#020617] via-[#031824] to-[#020617]">
+      <section id="contatto" className="py-24 px-6 bg-white">
         <div className="max-w-6xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Vuoi aumentare i tuoi sopralluoghi?</h2>
-          <p className="text-white/80 max-w-3xl mx-auto mb-12">Prenota una consulenza gratuita: analizziamo lo scenario e verifichiamo se il nostro sistema è adatto alla tua realtà.</p>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#1a1a1a]">Vuoi aumentare i tuoi sopralluoghi?</h2>
+          <p className="text-[#555] max-w-3xl mx-auto mb-12">Prenota una consulenza gratuita: analizziamo lo scenario e verifichiamo se il nostro sistema è adatto alla tua realtà.</p>
           <TiffanyBox className="p-10 md:p-16 lg:p-20 inline-block max-w-3xl"><div className="md:text-lg"><ContactForm /></div></TiffanyBox>
         </div>
       </section>
