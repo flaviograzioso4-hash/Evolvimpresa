@@ -128,14 +128,12 @@ html { scroll-behavior: auto; }
   left: 0;
   right: 0;
   bottom: -8px;
-  height: 6px; /* taller for a pen-like stroke */
+  height: 6px;
   border-radius: 999px;
-  /* make the underline yellow-tinted rather than white */
-  background: linear-gradient(90deg, rgba(255,212,0,1) 0%, rgba(255,212,0,0.95) 60%, rgba(255,176,0,0.9) 100%);
-  box-shadow: 0 0 18px rgba(255,212,0,0.35);
+  background: linear-gradient(90deg, rgba(255,122,26,1) 0%, rgba(255,122,26,0.95) 60%, rgba(255,122,26,0.9) 100%);
+  box-shadow: 0 0 18px rgba(255,122,26,0.35);
   transform-origin: left center;
   transform: scaleX(0) scaleY(0.6) translateY(0);
-  /* animation moved to the activatable class .play-underline to control when it runs */
 }
 
 @keyframes underline-slide {
