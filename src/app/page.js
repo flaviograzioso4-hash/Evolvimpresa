@@ -172,7 +172,7 @@ function ProIconDrop3D() {
 /**********************
  * UI HELPERS (compattati)
  **********************/
-const TIFFANY_CARD = 'relative bg-[#071827] border-4 border-transparent rounded-3xl transition duration-500 will-change-transform';
+const TIFFANY_CARD = 'relative bg-[#071827] border-4 border-transparent rounded-3xl transition duration-500 will-change-auto';
 const TIFFANY_CARD_P = 'p-8';
 const TIFFANY_CARD_SMALL = 'rounded-2xl border-4 border-transparent transition duration-500';
 
@@ -287,7 +287,7 @@ function ContactForm() {
 function RevealBox({ children, className = '' }) {
   const ref = useRef(null);
   const { active } = usePersistentInView(ref, 0.25);
-  const base = 'rounded-[28px] border-4 border-transparent bg-[#061321]/70 p-8 md:p-12 transition duration-700 will-change-transform';
+  const base = 'rounded-[28px] border-4 border-transparent bg-[#061321]/70 p-8 md:p-12 transition duration-700 will-change-auto';
   const activeClass = 'border-[#FFE55A] ring-4 ring-[#FFE55A]/40 shadow-[0_0_160px_rgba(255,212,0,0.8)] scale-[1.02]';
   const inactiveClass = 'ring-0 shadow-[0_0_30px_rgba(255,212,0,0.12)] scale-100';
   return <div ref={ref} className={`${base} ${active ? activeClass : inactiveClass} ${className}`}>{children}</div>;
@@ -306,7 +306,7 @@ function StepItem({ index, title, children }) {
       <div className={`absolute -top-8 left-1/2 -translate-x-1/2 md:top-1/2 md:-left-8 md:-translate-y-1/2 md:translate-x-0 w-[60px] h-[60px] rounded-full flex items-center justify-center text-2xl font-extrabold z-30 ${
         active ? 'bg-[#FFE55A] text-[#020617] ring-4 ring-[#FFE55A]/40 shadow-[0_0_40px_rgba(255,212,0,0.7)]' : 'bg-[#0A2B33] text-white/80'
       }`}>{index}</div>
-      <h3 className="text-lg font-semibold mb-2">{title}</h3>
+      <h3 className="text-lg font-semibold mb-2 text-white">{title}</h3>
       <p className="text-white/80 text-sm leading-relaxed">{children}</p>
     </div>
   );
@@ -493,7 +493,7 @@ function PageContent() {
                   <li className="flex items-start gap-3"><span className="mt-1">❌</span><span><span className="text-white">Gestione senza programmazione</span> né pianificazione reale.</span></li>
                   <li className="flex items-start gap-3"><span className="mt-1">❌</span><span>Zero disponibilità a seguire <span className="text-white">sopralluoghi confermati</span>.</span></li>
                   <li className="flex items-start gap-3"><span className="mt-1">❌</span><span>Nessuna <span className="text-white">organizzazione minima</span> per gestire i lavori.</span></li>
-                  <li className="flex items-start gap-3"><span className="mt-1">❌</span><span>Chi cerca un “tentativo” invece di un <span className="text-white">sistema stabile e professionale</span>.</span></li>
+                  <li className="flex items-start gap-3"><span className="mt-1">❌</span><span>Chi cerca un "tentativo" invece di un <span className="text-white">sistema stabile e professionale</span>.</span></li>
                 </ul>
               </div>
               <div className="relative">
