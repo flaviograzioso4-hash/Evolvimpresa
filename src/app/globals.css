@@ -52,7 +52,7 @@ body {
   font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: auto; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
 /* Glow underline with pulsating background */
@@ -531,5 +531,3 @@ html { scroll-behavior: smooth; }
 .site-header-inner::before{content:"";position:absolute;inset:0;border-radius:14px;pointer-events:none;box-shadow:0 6px 30px rgba(255,212,0,0.09) inset,0 8px 40px rgba(255,212,0,0.04);mix-blend-mode:screen}
 .site-header-inner img,.site-header-inner picture,.site-header-inner .logo-img,.site-header-inner>div img{border:none!important;box-shadow:none!important;outline:none!important;background:transparent!important;padding:0!important;margin:0!important}
 @media (prefers-reduced-motion: reduce){.site-header-inner{transition:none}}
-
-
