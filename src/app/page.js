@@ -370,9 +370,9 @@ function PageContent() {
   const [playFree, setPlayFree] = useState(false);
   useEffect(() => { setPlayFree(true); }, []);
   return (
-    <main className="min-h-screen pt-20 md:pt-24 bg-transparent text-white">
+    <main className="min-h-screen pt-20 md:pt-24 bg-[#020617] text-white">
       {/* HERO */}
-      <section className="min-h-screen py-24 px-6 bg-gradient-to-b from-[#6b6b6b] to-[#6e6e6e] relative overflow-hidden">
+      <section className="min-h-screen py-24 px-6 bg-black relative overflow-hidden">
         <div className="pointer-events-none absolute inset-0">
           <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-[120px] h-[120px] rounded-full bg-[#FFD400]/6 blur-[28px]" />
         </div>
@@ -412,7 +412,7 @@ function PageContent() {
       </section>
 
       {/* IL VERO PROBLEMA */}
-      <section className="py-28 px-6 bg-gradient-to-b from-[#696969] to-[#6b6b6b] relative overflow-hidden">
+      <section className="py-28 px-6 bg-[#020B14] relative overflow-hidden">
         <div className="pointer-events-none absolute inset-0">
           <div className="absolute right-[-80px] top-[-80px] w-64 h-64 rounded-full bg-[#FFD400]/20 blur-[160px]" />
           <div className="absolute left-[-80px] bottom-[-80px] w-64 h-64 rounded-full bg-[#FFD400]/10 blur-[160px]" />
@@ -442,7 +442,7 @@ function PageContent() {
       </section>
 
       {/* CHIUSURA */}
-      <section className="py-28 px-6 bg-gradient-to-b from-[#6e6e6e] to-[#696969] relative overflow-hidden">
+      <section className="py-28 px-6 bg-[#03101B] relative overflow-hidden">
         <div className="pointer-events-none absolute inset-0"><div className="absolute left-[-120px] bottom-[-100px] w-72 h-72 rounded-full bg-[#FFD400]/20 blur-[160px]" /></div>
         <div className="relative max-w-6xl mx-auto z-10">
           <RevealBox className="text-left md:text-center">
@@ -454,7 +454,7 @@ function PageContent() {
       </section>
 
       {/* VALORE */}
-      <section className="py-28 px-6 bg-gradient-to-b from-[#707070] to-[#6b6b6b] relative overflow-hidden">
+      <section className="py-28 px-6 bg-[#020617] relative overflow-hidden">
         <div className="pointer-events-none absolute inset-0">
           <div className="absolute right-[-120px] top-[-80px] w-72 h-72 rounded-full bg-[#FFD400]/16 blur-[160px]" />
           <div className="absolute left-[-120px] bottom-[-100px] w-72 h-72 rounded-full bg-[#FFD400]/8 blur-[160px]" />
@@ -512,7 +512,7 @@ function PageContent() {
       </section>
 
       {/* COME FUNZIONA */}
-      <section id="come-funziona" className="py-24 px-6 bg-gradient-to-b from-[#6b6b6b] via-[#6e6e6e] to-[#6b6b6b] relative overflow-hidden">
+      <section id="come-funziona" className="py-24 px-6 bg-gradient-to-b from-[#020617] via-[#041421] to-[#020617] relative overflow-hidden">
         <div className="pointer-events-none absolute inset-0"><div className="absolute right-[-100px] top-0 w-72 h-72 rounded-full bg-[#FFD400]/20 blur-[140px]" /></div>
         <div className="relative max-w-6xl mx-auto grid gap-10 md:grid-cols-2 items-center">
           <div>
@@ -532,7 +532,7 @@ function PageContent() {
       </section>
 
       {/* COSA OTTIENI */}
-      <section className="py-24 px-6 bg-gradient-to-b from-[#707070] to-[#696969] relative overflow-hidden">
+      <section className="py-24 px-6 bg-[#020B14] relative overflow-hidden">
         <div className="pointer-events-none absolute inset-0"><div className="absolute left-1/2 -translate-x-1/2 bottom-[-160px] w-[420px] h-[420px] rounded-full bg-[#FFD400]/14 blur-[160px]" /></div>
         <div className="relative max-w-6xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">Cosa ottieni davvero per far crescere la tua impresa.</h2>
@@ -546,7 +546,7 @@ function PageContent() {
       </section>
 
       {/* TEAM */}
-      <section className="py-24 px-6 bg-gradient-to-b from-[#6e6e6e] to-[#6b6b6b] relative overflow-hidden">
+      <section className="py-24 px-6 bg-[#020617] relative overflow-hidden">
         <div className="pointer-events-none absolute inset-0"><div className="absolute right-[-100px] bottom-[-120px] w-72 h-72 rounded-full bg-[#FFD400]/18 blur-[140px]" /></div>
         <div className="relative max-w-6xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">Il team di EvolvImpresa.</h2>
@@ -565,7 +565,7 @@ function PageContent() {
       </section>
 
       {/* CTA FINALE */}
-      <section id="contatto" className="py-24 px-6 bg-gradient-to-b from-[#6b6b6b] via-[#707070] to-[#6b6b6b]">
+      <section id="contatto" className="py-24 px-6 bg-gradient-to-b from-[#020617] via-[#031824] to-[#020617]">
         <div className="max-w-6xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Vuoi aumentare i tuoi sopralluoghi?</h2>
           <p className="text-white/80 max-w-3xl mx-auto mb-12">Prenota una consulenza gratuita: analizziamo lo scenario e verifichiamo se il nostro sistema è adatto alla tua realtà.</p>
