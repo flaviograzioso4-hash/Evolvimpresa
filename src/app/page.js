@@ -370,22 +370,22 @@ function PageContent() {
   const [playFree, setPlayFree] = useState(false);
   useEffect(() => { setPlayFree(true); }, []);
   return (
-    <main className="min-h-screen pt-20 md:pt-24 bg-[#020617] text-white">
+    <main className="min-h-screen pt-20 md:pt-24 bg-white text-[#1a1a1a]">
       {/* HERO */}
-      <section className="min-h-screen py-24 px-6 bg-black relative overflow-hidden">
+      <section className="min-h-screen py-24 px-6 bg-white relative overflow-hidden border-b border-[#FFD400]/20">
         <div className="pointer-events-none absolute inset-0">
           <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-[120px] h-[120px] rounded-full bg-[#FFD400]/6 blur-[28px]" />
         </div>
         <div className="relative max-w-6xl mx-auto w-full">
           <div className="max-w-5xl mx-auto text-center">
-            <p className="text-3xl md:text-4xl lg:text-5xl text-white/75 mb-3 whitespace-nowrap">
+            <p className="text-3xl md:text-4xl lg:text-5xl text-[#666] mb-3 whitespace-nowrap">
               <Typewriter text={"Contatti? No Cantieri!🚧"} speed={50} className="inline-block" highlightText={"Cantieri!"} highlightClass={'lamborghini text-[#FFD400]'} highlightStyle={{ fontSize: 'calc(1em + 4px)' }} />
             </p>
             <h1 className="font-extrabold leading-tight mb-4 text-center">
-              <span className="block text-3xl md:text-4xl lg:text-5xl leading-tight">Con il <span className="text-[#FFD400]">partner giusto </span><span className="text-white">arrivano</span></span>
-              <span className="block text-3xl md:text-4xl lg:text-5xl leading-tight mt-3"><span className="lamborghini text-[#FFD400] heartbeat">Clienti Garantiti  </span> ogni mese</span>
+              <span className="block text-3xl md:text-4xl lg:text-5xl leading-tight">Con il <span className="text-[#FF7A1A]">partner giusto </span><span className="text-[#1a1a1a]">arrivano</span></span>
+              <span className="block text-3xl md:text-4xl lg:text-5xl leading-tight mt-3"><span className="lamborghini text-[#FF7A1A] heartbeat">Clienti Garantiti  </span> ogni mese</span>
             </h1>
-            <p className="text-lg md:text-xl text-white/85 max-w-3xl mx-auto mb-6">
+            <p className="text-lg md:text-xl text-[#555] max-w-3xl mx-auto mb-6">
               Un <span className="lamborghini glow-underline font-normal text-xl md:text-4xl lamborghini-scale-plus">Strumento</span>, adottato da oltre <span className="lamborghini glow-underline font-normal text-xl md:text-2xl lamborghini-scale-plus">300 Imprese Italiane</span>, pensato per far crescere la tua azienda con risultati chiari, senza nessuna sorpresa.
             </p>
             <div className="mt-6 mb-4 text-center">
@@ -402,7 +402,7 @@ function PageContent() {
             <div className="mt-12 mb-14 flex justify-center">
               <PrimaryCTA href="#contatto"><span className="text-xl leading-none">👤</span>Candidati ora al colloquio di selezione</PrimaryCTA>
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-center mt-16 mb-12">Il percorso in 5 fasi che fa crescere la tua impresa.</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-center mt-16 mb-12 text-[#1a1a1a]">Il percorso in 5 fasi che fa crescere la tua impresa.</h2>
             <VerticalSteps />
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <PrimaryCTA href="#contatto"><span className="text-xl leading-none">👤</span>Candidati ora al colloquio di selezione</PrimaryCTA>
