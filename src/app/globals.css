@@ -47,13 +47,13 @@
 }
 
 body {
-  background: #F5F5F5;
-  color: #1a1a1a;
+  background: #0a0a0a;
+  color: white;
   font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   position: relative;
 }
 
-/* Lamborghini-inspired diagonal lines background pattern */
+/* Lamborghini-inspired white diagonal lines background pattern */
 body::before {
   content: "";
   position: fixed;
@@ -62,8 +62,8 @@ body::before {
   width: 100%;
   height: 100%;
   background-image:
-    repeating-linear-gradient(45deg, transparent, transparent 180px, rgba(255,212,0,0.08) 180px, rgba(255,212,0,0.08) 182px),
-    repeating-linear-gradient(-45deg, transparent, transparent 180px, rgba(255,212,0,0.06) 180px, rgba(255,212,0,0.06) 182px);
+    repeating-linear-gradient(45deg, transparent, transparent 180px, rgba(255,255,255,0.08) 180px, rgba(255,255,255,0.08) 182px),
+    repeating-linear-gradient(-45deg, transparent, transparent 180px, rgba(255,255,255,0.06) 180px, rgba(255,255,255,0.06) 182px);
   pointer-events: none;
   z-index: 1;
 }
@@ -82,7 +82,7 @@ html { scroll-behavior: auto; }
   text-decoration: underline;
   text-decoration-thickness: 2px;
   text-underline-offset: 4px;
-  text-decoration-color: #FF7A1A;
+  text-decoration-color: #FFD400;
   z-index: 0;
 }
 .glow-underline::before {
@@ -93,9 +93,9 @@ html { scroll-behavior: auto; }
   top: -6px;
   bottom: -6px;
   border-radius: 8px;
-  background: radial-gradient(circle at 50% 50%, rgba(255,122,26,0.25), rgba(255,122,26,0.06));
+  background: radial-gradient(circle at 50% 50%, rgba(255,212,0,0.25), rgba(255,212,0,0.06));
   filter: blur(12px);
-  opacity: 0.6;
+  opacity: 0.8;
   z-index: -1;
   pointer-events: none;
   transform-origin: center;
@@ -130,8 +130,8 @@ html { scroll-behavior: auto; }
   bottom: -8px;
   height: 6px;
   border-radius: 999px;
-  background: linear-gradient(90deg, rgba(255,122,26,1) 0%, rgba(255,122,26,0.95) 60%, rgba(255,122,26,0.9) 100%);
-  box-shadow: 0 0 18px rgba(255,122,26,0.35);
+  background: linear-gradient(90deg, rgba(255,212,0,1) 0%, rgba(255,212,0,0.95) 60%, rgba(255,176,0,0.9) 100%);
+  box-shadow: 0 0 18px rgba(255,212,0,0.45);
   transform-origin: left center;
   transform: scaleX(0) scaleY(0.6) translateY(0);
 }
