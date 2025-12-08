@@ -54,7 +54,7 @@ body {
   position: relative;
 }
 
-/* Lamborghini-inspired white diagonal lines background pattern */
+/* Lamborghini-inspired white diagonal lines background pattern with metallic overlay */
 body::before {
   content: "";
   position: fixed;
@@ -63,8 +63,9 @@ body::before {
   width: 100%;
   height: 100%;
   background-image:
-    repeating-linear-gradient(45deg, transparent, transparent 180px, rgba(255,255,255,0.08) 180px, rgba(255,255,255,0.08) 182px),
-    repeating-linear-gradient(-45deg, transparent, transparent 180px, rgba(255,255,255,0.06) 180px, rgba(255,255,255,0.06) 182px);
+    repeating-linear-gradient(45deg, transparent, transparent 180px, rgba(255,255,255,0.06) 180px, rgba(255,255,255,0.06) 182px),
+    repeating-linear-gradient(-45deg, transparent, transparent 180px, rgba(255,255,255,0.05) 180px, rgba(255,255,255,0.05) 182px),
+    linear-gradient(45deg, rgba(255,255,255,0.02) 0%, transparent 50%, rgba(0,0,0,0.02) 100%);
   pointer-events: none;
   z-index: 1;
 }
